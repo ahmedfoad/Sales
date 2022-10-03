@@ -11,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -34,6 +36,7 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddDbContext<StoreContext>(a => a.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
         }
